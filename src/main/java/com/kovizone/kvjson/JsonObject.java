@@ -2,8 +2,11 @@ package com.kovizone.kvjson;
 
 import com.kovizone.kvjson.constant.JsonParserConstant;
 import com.kovizone.kvjson.exception.KvJsonParseException;
+import com.kovizone.kvjson.parser.JsonParser;
+import com.kovizone.kvjson.parser.ObjectParser;
 import com.kovizone.kvjson.parser.StringParser;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -25,6 +28,22 @@ public class JsonObject extends HashMap<String, Object> {
 
     public static JsonObject parse(String json) throws KvJsonParseException {
         return (JsonObject) new StringParser().parse(json);
+    }
+
+    public static JsonObject parse(Object object) throws KvJsonParseException {
+        return (JsonObject) new ObjectParser().parse(object);
+    }
+
+    public static JsonObject parse(Object object, boolean intrusive) throws KvJsonParseException {
+        return (JsonObject) new ObjectParser(intrusive).parse(object);
+    }
+
+    public <T> T toObject(Class<T> clazz) throws KvJsonParseException {
+        return (T) new JsonParser().parse(this, clazz);
+    }
+
+    public <T> T toObject(Class<T> clazz, boolean intrusive) throws KvJsonParseException {
+        return (T) new JsonParser(intrusive).parse(this, clazz);
     }
 
     public JsonArray getJsonArray(String key) {

@@ -9,6 +9,7 @@ import com.kovizone.kvjson.exception.KvJsonParseException;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
@@ -47,22 +48,34 @@ public class JsonParserTest {
     }
 
     @Test
-    public void test4() throws KvJsonParseException, NoSuchFieldException {
+    public void test4() throws KvJsonParseException, NoSuchFieldException, ClassNotFoundException {
         People people1 = new People();
         people1.setId(1);
+        people1.setDate(new Date());
+        people1.setName("测试");
 
-        People son = new People();
-        son.setId(2);
-        people1.setChild(Arrays.asList(son));
+        People people2 = new People();
+        people2.setId(2);
+        people2.setChild(Arrays.asList(people1));
 
-
-        JsonObject jsonObject = (JsonObject) new ObjectParser().parse(people1);
-        String json = jsonObject.toString();
-
+        JsonObject jsonObject = JsonObject.parse(people2);
         System.out.println(jsonObject);
 
-        People people2 = (People) new JsonParser().parse(jsonObject, People.class);
-        System.out.println(people2);
+
+        People people3 = jsonObject.toObject(People.class);
+        System.out.println(people3);
+
+    }
+
+    @Test
+    public void test5() throws KvJsonParseException, NoSuchFieldException {
+        Type type = People.class.getDeclaredField("child").getGenericType();
+        System.out.println(type instanceof ParameterizedType);
+    }
+
+    @Test
+    public void test6() throws NoSuchMethodException {
+        Method method = People.class.getDeclaredMethod("setId", Object.class);
     }
 
     public boolean check(Object obj) {

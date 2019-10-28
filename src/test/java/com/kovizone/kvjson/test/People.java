@@ -4,9 +4,11 @@ import com.kovizone.kvjson.annotation.DateFormat;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class People {
-    @DateFormat
+
+
     private Date date;
     private Integer id;
     private String name;
@@ -14,7 +16,21 @@ public class People {
     private Integer age;
     private String work;
     private Character sex;
-    private List child;
+    private List<People> child;
+
+    @Override
+    public String toString() {
+        return "People{" +
+                "date=" + date +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", flag=" + flag +
+                ", age=" + age +
+                ", work='" + work + '\'' +
+                ", sex=" + sex +
+                ", child=" + child +
+                '}';
+    }
 
     public Date getDate() {
         return date;

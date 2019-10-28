@@ -40,4 +40,6 @@ public class JsonParserConstant {
     public static final char LOWER_Z = 'z';
 
     public static final char EMPTY = ' ';
+
+    public static final char QUESTION = '?';
 }

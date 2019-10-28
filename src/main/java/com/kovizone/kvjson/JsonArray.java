@@ -2,6 +2,8 @@ package com.kovizone.kvjson;
 
 import com.kovizone.kvjson.constant.JsonParserConstant;
 import com.kovizone.kvjson.exception.KvJsonParseException;
+import com.kovizone.kvjson.parser.JsonParser;
+import com.kovizone.kvjson.parser.ObjectParser;
 import com.kovizone.kvjson.parser.StringParser;
 
 import java.util.ArrayList;
@@ -30,6 +32,18 @@ public class JsonArray extends ArrayList<Object> {
 
     public static JsonArray parse(String json) throws KvJsonParseException {
         return (JsonArray) new StringParser().parse(json);
+    }
+
+    public static JsonArray parse(Object object) throws KvJsonParseException {
+        return (JsonArray) new ObjectParser().parse(object);
+    }
+
+    public <T> Collection<T> toArray(Class<T> clazz) throws KvJsonParseException {
+        return (Collection<T>) new JsonParser().parse(this, clazz);
+    }
+
+    public <T> Collection<T> toObject(Class<T> clazz, boolean intrusive) throws KvJsonParseException {
+        return (Collection<T>) new JsonParser(intrusive).parse(this, clazz);
     }
 
     public JsonObject getJsonObject(int index) {
