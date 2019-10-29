@@ -2,6 +2,7 @@ package com.kovizone.kvjson;
 
 import com.kovizone.kvjson.constant.JsonParserConstant;
 import com.kovizone.kvjson.exception.KvJsonParseException;
+import com.kovizone.kvjson.parser.JsonFormat;
 import com.kovizone.kvjson.parser.JsonParser;
 import com.kovizone.kvjson.parser.ObjectParser;
 import com.kovizone.kvjson.parser.StringParser;
@@ -112,5 +113,9 @@ public class JsonArray extends ArrayList<Object> {
             }
             sb.append(',');
         }
+    }
+
+    public String toFormatString() {
+        return JsonFormat.format(toString());
     }
 }

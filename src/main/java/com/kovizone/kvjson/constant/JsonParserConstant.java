@@ -40,6 +40,18 @@ public class JsonParserConstant {
     public static final char LOWER_Z = 'z';
 
     public static final char EMPTY = ' ';
+    public static final String NONE = "";
 
     public static final char QUESTION = '?';
+
+    public static final String LINE_SEPARATOR = System.getProperty("line.separator");
+
+    public static final String INDENT = "\t";
+
+    public static final String SPACE = " ";
+
+    public static final char QUOTATION = '\'';
+    
+    public static final char DOUBLE_QUOTATION = '"';
+
 }
