@@ -2,6 +2,7 @@ package com.kovizone.kvjson.test;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kovizone.kvjson.JsonArray;
+import com.kovizone.kvjson.JsonFormat;
 import com.kovizone.kvjson.JsonObject;
 import com.kovizone.kvjson.parser.JsonParser;
 import com.kovizone.kvjson.parser.ObjectParser;
@@ -56,14 +57,33 @@ public class JsonParserTest {
 
         People people2 = new People();
         people2.setId(2);
-        people2.setChild(Arrays.asList(people1));
+        people2.setName("测试2");
+        people2.setSex('F');
 
-        JsonObject jsonObject = JsonObject.parse(people2);
+        People people4 = new People();
+        people4.setId(4);
+        people4.setName("测试4");
+        people4.setSex('M');
+
+        People people3 = new People();
+        people3.setId(3);
+        people3.setChild(Arrays.asList(people1,people2));
+        people3.setDidi(people4);
+
+        JsonObject jsonObject = JsonObject.parse(people3);
         System.out.println(jsonObject);
 
 
-        People people3 = jsonObject.toObject(People.class);
-        System.out.println(people3);
+        People people100 = jsonObject.toObject(People.class);
+        //System.out.println(people3);
+
+        String json = "{\"di{di\":{\"sex\":\"M\",\"name\":\"测试4\",\"id\":4},\"id\":3,\"child\":[{\"date\":1572255445717,\"name\":\"测试\",\"id\":1},{\"sex\":\"F\",\"name\":\"测试2\",\"id\":2}]}";
+        String before = JsonFormat.format(json);
+        String after = JsonFormat.compress(before);
+        System.out.println("before");
+        System.out.println(before);
+        System.out.println("after");
+        System.out.println(after);
 
     }
 
@@ -74,8 +94,8 @@ public class JsonParserTest {
     }
 
     @Test
-    public void test6() throws NoSuchMethodException {
-        Method method = People.class.getDeclaredMethod("setId", Object.class);
+    public void test6() {
+        System.out.println("1" + System.getProperty("line.separator") + "\tn2");
     }
 
     public boolean check(Object obj) {

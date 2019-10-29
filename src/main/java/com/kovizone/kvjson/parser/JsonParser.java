@@ -27,10 +27,6 @@ public class JsonParser {
      */
     private boolean intrusive = false;
 
-    public void setIntrusive(boolean intrusive) {
-        this.intrusive = intrusive;
-    }
-
     public JsonParser(boolean intrusive) {
         this.intrusive = intrusive;
     }

@@ -17,6 +17,15 @@ public class People {
     private String work;
     private Character sex;
     private List<People> child;
+    private People didi;
+
+    public People getDidi() {
+        return didi;
+    }
+
+    public void setDidi(People didi) {
+        this.didi = didi;
+    }
 
     @Override
     public String toString() {
